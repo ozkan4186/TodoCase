@@ -1,16 +1,14 @@
-"use client"
+import React from "react";
+import "./global.css";
+export const metadata = {
+  title: "Todo Case",
+  description: "Todo App configurations",
+};
 
-import React, { Component } from 'react'
-import "./global.css"
-export default class layout extends Component {
-  render() {
-    const {children} =this.props
-    return (
-      <html lang='en' >
-        <body>
-          {children}
-        </body>
-      </html>
-    )
-  }
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
 }

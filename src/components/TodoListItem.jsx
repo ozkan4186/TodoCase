@@ -1,13 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class TodoListItem extends Component {
-  render() {
-    return (
+const TodoListItem = ({ item, toggleTodo, deleteTodo }) => {
+  return (
+    <div>
       <li>
-        <p className="checked">Todo </p>
-        <p> Todo </p>
-        <span className="task-icons">✖️</span>
+        {item.isDone ? (
+          <p className="checked" onClick={() => toggleTodo(item)}>
+            {item.task}
+          </p>
+        ) : (
+          <p onClick={() => toggleTodo(item)}>{item.task}</p>
+        )}
+        <span className="task-icons" onClick={() => deleteTodo(item.id)}>
+          ✖️
+        </span>{" "}
       </li>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default TodoListItem

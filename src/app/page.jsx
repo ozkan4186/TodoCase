@@ -1,14 +1,12 @@
-"use client"
+import Home from '@/components/home'
+import React from 'react'
 
-import React, { Component } from 'react'
-import Home from './home'
-
-export default class page extends Component {
-  render() {
-    return (
-      <div>
-        <Home/>
-      </div>
-    )
-  }
+const page = () => {
+  return (
+    <div>
+      <Home/>
+    </div>
+  )
 }
+
+export default page
