@@ -1,4 +1,4 @@
-import React from 'react'
+import Image from "next/image";
 
 const TodoListItem = ({ item, toggleTodo, deleteTodo }) => {
   return (
@@ -11,6 +11,12 @@ const TodoListItem = ({ item, toggleTodo, deleteTodo }) => {
         ) : (
           <p onClick={() => toggleTodo(item)}>{item.task}</p>
         )}
+        <Image
+          src={item.image} // Görsel verisini buradan alın
+          alt="Açıklama metni"
+          width={500} 
+          height={300} 
+        />
         <span className="task-icons" onClick={() => deleteTodo(item.id)}>
           ✖️
         </span>{" "}
@@ -19,4 +25,4 @@ const TodoListItem = ({ item, toggleTodo, deleteTodo }) => {
   );
 };
 
-export default TodoListItem
+export default TodoListItem;
