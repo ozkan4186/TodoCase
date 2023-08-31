@@ -1,4 +1,4 @@
-
+[https://main--regal-pasca-f5da9a.netlify.app/](link)
 
 Bir To-Do(Yapılacaklar) listesi uygulaması. Uygulamanın bir front-end ve back-end kısmı olmalıdır. Ayrıca uygulama, veritabanı kullanmalı ve REST API üzerinden CRUD işlemleri yapabilmelidir.(Mock Api kullanabilirsiniz.) 
       Mock Apide task,id ve isdone oluşturarak onları crud işlemlerini uyguladım
