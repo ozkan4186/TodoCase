@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useState, useEffect } from "react";
 import InputForm from "@/components/InputForm";
 import Todolist from "./Todolist";
@@ -11,19 +10,17 @@ const Home = ({ todos }) => {
   // Verileri state içinde yönetmek için useState kullanın
   const [todoData, setTodoData] = useState(todos);
 
-  const fetchData = () => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        resolve(data);
-      } catch (error) {
-        reject(error);
+  const fetchData = async () => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-    });
+      const data = await response.json();
+      setTodoData(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const addTodo = async (text) => {
@@ -33,7 +30,7 @@ const Home = ({ todos }) => {
     };
     try {
       await axios.post(url, newTodo);
-      fetchData().then((data) => setTodoData(data));
+      fetchData();
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +39,7 @@ const Home = ({ todos }) => {
   const toggleTodo = async (item) => {
     try {
       await axios.put(`${url}/${item.id}`, { ...item, isDone: !item.isDone });
-      fetchData().then((data) => setTodoData(data));
+      fetchData();
     } catch (error) {
       console.log(error);
     }
@@ -51,20 +48,20 @@ const Home = ({ todos }) => {
   const deleteTodo = async (id) => {
     try {
       await axios.delete(`${url}/${id}`);
-      fetchData().then((data) => setTodoData(data));
+      fetchData();
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    fetchData()
-      .then((data) => {
-        setTodoData(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    fetchData();
+
+    // Her 30 saniyede bir verileri yeniden almak için setInterval kullanılır
+    const intervalId = setInterval(fetchData, 30000);
+
+    // Komponentin ayrılması (unmount) durumunda bu interval'i temizlemek önemlidir.
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
